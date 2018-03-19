@@ -1,0 +1,15 @@
+FROM centos:7
+ENV MQ_VERSION 3.3.5
+ENV LOG_PATH /var/log/rabbitmq
+ENV REF http://www.rabbitmq.com
+ENV HTTP_PORT 15672
+
+RUN yum install -y epel-release yum-axelget 
+RUN yum -y update
+RUN yum install rabbitmq-server -y && rabbitmq-plugins enable rabbitmq_management && rabbitmq-plugins enable rabbitmq_management_agent
+
+
+# Management HTTP PORT : 15672
+EXPOSE 4369 5672 25672 15672
+
+CMD ["rabbitmq-server"]
